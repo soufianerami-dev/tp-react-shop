@@ -62,3 +62,69 @@ Quand il y a beaucoup de composants, le code devient plus difficile à lire et �
 **Grille de produits**
 
 ![Grille de produits](screen-short/step2/product-grid.png)
+
+---
+
+# Étape 3 — useEffect : chargement des données
+
+## Q3.1 — Pourquoi utiliser useEffect pour les appels réseau ?
+
+`useEffect` lance le `fetch()` après le rendu du composant.
+Si on met `fetch()` dans le composant, il sera exécuté à chaque rendu.
+
+---
+
+## Q3.2 — Quel est le rôle du tableau de dépendances [searchQuery, page] ?
+
+Le tableau lance `useEffect` quand `searchQuery` ou `page` change.
+
+- Avec `[]`, le code est exécuté une seule fois.
+- Sans tableau, le code est exécuté à chaque rendu.
+
+---
+
+## Q3.3 — Montrer votre implémentation du useEffect dans useProducts
+
+```jsx
+useEffect(() => {
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const skip = (page - 1) * PAGE_SIZE;
+
+      let url = '';
+
+      if (searchQuery) {
+        url = `${BASE_URL}/search?q=${searchQuery}&limit=${PAGE_SIZE}&skip=${skip}`;
+      } else {
+        url = `${BASE_URL}?limit=${PAGE_SIZE}&skip=${skip}`;
+      }
+
+      const response = await fetch(url);
+      const data = await response.json();
+
+      setProducts(data.products);
+      setTotal(data.total);
+
+    } catch (err) {
+      setError(err.message);
+
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchProducts();
+
+}, [searchQuery, page]);
+```
+
+---
+
+## Q3.4 — Capture d'écran : les produits s'affichent, la pagination fonctionne
+
+**Produits page 2**
+
+![Produits page 2](screen-short/step3/page-2-products.png)

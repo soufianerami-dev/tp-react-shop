@@ -12,23 +12,16 @@ import { useCartContext } from '../../context/CartContext.jsx'
  *   onPageChange : function — appelée avec le nouveau numéro de page
  */
 export default function ProductList({ searchQuery, currentPage, onPageChange }) {
-  // =============================================================
-  // TODO Étape 3 — useEffect (via useProducts)
-  // Remplacer les 4 lignes ci-dessous par :
-  //   const { products, total, loading, error } = useProducts(searchQuery, currentPage)
-  // =============================================================
-  const products = [
-          {
-            id: 1,
-            title: 'Produit test',
-            price: 9.99,
-            thumbnail: 'https://placehold.co/300x200',
-            rating: 4.5
-          }
-    ]
-  const total = 0
-  const loading = false
-  const error = null
+  
+      const {
+      products,
+      total,
+      loading,
+      error
+    } = useProducts(
+      searchQuery,
+      currentPage
+    );
 
   // =============================================================
   // TODO Étape 6 — useContext
@@ -77,17 +70,13 @@ export default function ProductList({ searchQuery, currentPage, onPageChange }) 
             ))}
           </div>
 
-          {/* =============================================================
-              TODO Étape 3
-              Afficher la pagination quand totalPages > 1 :
-                {totalPages > 1 && (
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={onPageChange}
-                  />
-                )}
-              ============================================================= */}
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        />
+      )}
         </>
       )}
     </div>
