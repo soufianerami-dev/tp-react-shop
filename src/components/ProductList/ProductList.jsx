@@ -17,7 +17,15 @@ export default function ProductList({ searchQuery, currentPage, onPageChange }) 
   // Remplacer les 4 lignes ci-dessous par :
   //   const { products, total, loading, error } = useProducts(searchQuery, currentPage)
   // =============================================================
-  const products = []
+  const products = [
+          {
+            id: 1,
+            title: 'Produit test',
+            price: 9.99,
+            thumbnail: 'https://placehold.co/300x200',
+            rating: 4.5
+          }
+    ]
   const total = 0
   const loading = false
   const error = null
@@ -54,20 +62,20 @@ export default function ProductList({ searchQuery, currentPage, onPageChange }) 
         </div>
       ) : (
         <>
-          {/* =============================================================
-              TODO Étape 2
-              Remplacer le texte ci-dessous par la grille de ProductCard :
-                <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-                  {products.map(product => (
-                    <div key={product.id} className="col">
-                      <ProductCard product={product} onAddToCart={addToCart} />
-                    </div>
-                  ))}
-                </div>
-              ============================================================= */}
-          <p className="text-center text-muted">
-            TODO Étape 2 : afficher les {products.length} produits ici.
-          </p>
+         
+          <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="col"
+              >
+                <ProductCard
+                  product={product}
+                  onAddToCart={addToCart}
+                />
+              </div>
+            ))}
+          </div>
 
           {/* =============================================================
               TODO Étape 3
