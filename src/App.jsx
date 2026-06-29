@@ -4,6 +4,7 @@ import NavBar from './components/NavBar/NavBar.jsx'
 import Footer from './components/Footer/Footer.jsx'
 import ProductList from './components/ProductList/ProductList.jsx'
 import CartModal from './components/CartModal/CartModal.jsx'
+import { useDebounce } from './hooks/useDebounce.js'
 
 export default function App() {
 
@@ -16,11 +17,8 @@ export default function App() {
   const [currentPage, setCurrentPage] =
     useState(1);
 
-  // =============================================================
-  // TODO Étape 4 — useDebounce
-  // Importer useDebounce depuis './hooks/useDebounce.js'
-  // const debouncedQuery = useDebounce(searchQuery, 400)
-  // =============================================================
+  const debouncedQuery =
+    useDebounce(searchQuery, 400);
 
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -37,7 +35,8 @@ export default function App() {
 
       <main className="flex-grow-1 container py-4">
         <ProductList
-          searchQuery={searchQuery /* TODO Étape 4 : remplacer par debouncedQuery */}
+          
+          searchQuery={debouncedQuery}
           currentPage={currentPage}
           onPageChange={(_page) => {
             setCurrentPage(_page);

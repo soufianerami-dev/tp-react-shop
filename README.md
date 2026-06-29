@@ -128,3 +128,59 @@ useEffect(() => {
 **Produits page 2**
 
 ![Produits page 2](screen-short/step3/page-2-products.png)
+
+# Étape 4 — Hook personnalisé useDebounce
+
+## Q4.1 — Qu'est-ce que le debounce et pourquoi est-il utile ici ?
+
+Le debounce attend un petit temps avant le `fetch()`.
+
+Il évite plusieurs requêtes quand l'utilisateur écrit rapidement.
+
+---
+
+## Q4.2 — Quel est le rôle de la fonction de nettoyage (cleanup) retournée par useEffect ?
+
+`clearTimeout()` supprime l'ancien timer.
+
+Comme ça, un seul timer reste actif.
+
+---
+
+## Q4.3 — Montrer votre implémentation complète de useDebounce
+
+```jsx
+export function useDebounce(value, delay) {
+
+  const [debouncedValue, setDebouncedValue] =
+    useState(value);
+
+  useEffect(() => {
+
+    const timer =
+      setTimeout(() => {
+
+        setDebouncedValue(value);
+
+      }, delay);
+
+    return () => {
+
+      clearTimeout(timer);
+
+    };
+
+  }, [value, delay]);
+
+  return debouncedValue;
+
+}
+```
+
+---
+
+## Q4.4 — Preuve du debounce dans les DevTools réseau
+
+**Debounce réseau**
+
+![Debounce réseau](screen-short/step4/debounce-network.png)
