@@ -23,12 +23,9 @@ export default function ProductList({ searchQuery, currentPage, onPageChange }) 
       currentPage
     );
 
-  // =============================================================
-  // TODO Étape 6 — useContext
-  // Remplacer la ligne ci-dessous par :
-  //   const { addToCart } = useCartContext()
-  // =============================================================
-  const addToCart = () => {}
+    
+    const { addToCart } =
+       useCartContext();
 
   const totalPages = Math.ceil(total / PAGE_SIZE)
 

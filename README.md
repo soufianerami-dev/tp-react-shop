@@ -258,3 +258,65 @@ Le test n'est pas encore possible.
 À cette étape, le panier n'est pas encore connecté aux composants.
 
 La capture d'écran sera réalisée après l'Étape 6.
+
+
+---
+
+# Étape 6 — useContext : consommation du contexte
+
+## Q6.1 — Quel problème useContext résout-il par rapport au props drilling ?
+
+Sans `useContext`, la fonction `addToCart` devait être transmise de `App` vers `ProductList`, puis vers `ProductCard`.
+
+Avec `useContext`, chaque composant peut accéder directement au panier sans passer les données par plusieurs composants.
+
+---
+
+## Q6.2 — Montrer l'appel à useCartContext() dans CartModal
+
+```jsx
+const {
+  cart,
+  removeFromCart,
+  clearCart,
+  cartTotal
+} = useCartContext();
+```
+
+---
+
+## Q6.3 — Montrer le rendu d'un article du panier
+
+```jsx
+<li
+  key={item.id}
+  className="list-group-item d-flex justify-content-between align-items-center"
+>
+  <div>
+    <span className="fw-semibold">
+      {item.title}
+    </span>
+
+    <br />
+
+    <small className="text-muted">
+      Qté : {item.qty} × {item.price.toFixed(2)} $
+    </small>
+  </div>
+
+  <button
+    className="btn btn-sm btn-outline-danger"
+    onClick={() => removeFromCart(item.id)}
+  >
+    <i className="bi bi-trash"></i>
+  </button>
+</li>
+```
+
+---
+
+## Q6.4 — Capture d'écran : panier fonctionnel
+
+**Panier fonctionnel**
+
+![Panier fonctionnel](screen-short/step6/functional-cart.png)
