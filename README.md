@@ -184,3 +184,77 @@ export function useDebounce(value, delay) {
 **Debounce réseau**
 
 ![Debounce réseau](screen-short/step4/debounce-network.png)
+
+---
+
+# Étape 5 — Hook personnalisé useCart : useCallback + useMemo
+
+## Q5.1 — Pourquoi utiliser useCallback pour addToCart, removeFromCart et clearCart ?
+
+`useCallback` garde la même fonction entre les rendus.
+
+Cela évite de recréer les fonctions à chaque rendu, surtout avec le contexte.
+
+---
+
+## Q5.2 — Pourquoi utiliser useMemo pour cartCount et cartTotal ?
+
+`useMemo` mémorise le résultat d'un calcul.
+
+`useMemo` mémorise une valeur, alors que `useCallback` mémorise une fonction.
+
+---
+
+## Q5.3 — Montrer votre implémentation de addToCart avec useCallback
+
+```jsx
+const addToCart =
+  useCallback((product) => {
+
+    setCart((prev) => {
+
+      const existingProduct =
+        prev.find(
+          (item) => item.id === product.id
+        );
+
+      if (existingProduct) {
+
+        return prev.map((item) =>
+
+          item.id === product.id
+            ? {
+                ...item,
+                qty: item.qty + 1
+              }
+            : item
+
+        );
+
+      }
+
+      return [
+
+        ...prev,
+
+        {
+          ...product,
+          qty: 1
+        }
+
+      ];
+
+    });
+
+  }, []);
+```
+
+---
+
+## Q5.4 — Preuve de la persistance localStorage
+
+Le test n'est pas encore possible.
+
+À cette étape, le panier n'est pas encore connecté aux composants.
+
+La capture d'écran sera réalisée après l'Étape 6.
