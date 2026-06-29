@@ -320,3 +320,51 @@ const {
 **Panier fonctionnel**
 
 ![Panier fonctionnel](screen-short/step6/functional-cart.png)
+
+# Étape 7 — Finitions et vérifications
+
+## Checklist finale
+
+- [x] La recherche est débouncée (une seule requête après 400 ms de pause)
+- [x] La pagination fonctionne en mode navigation (sans recherche)
+- [x] Ajouter le même produit deux fois → la quantité s'incrémente (pas de doublon)
+- [x] Le panier est restauré après rafraîchissement de la page (F5)
+- [x] Le badge de la NavBar affiche le nombre total d'articles correct
+- [x] La suppression d'un article met à jour le badge et le total
+- [x] « Vider le panier » vide la liste et le localStorage
+- [x] Le total affiché dans la modale est correct
+
+---
+
+## Q7.1 — Bilan : quel hook vous a semblé le plus difficile à comprendre et pourquoi ?
+
+Le hook qui m'a semblé le plus difficile est **useContext**, car il nécessite de comprendre le fonctionnement du Provider et du Consumer pour partager les données entre plusieurs composants sans utiliser le props drilling.
+
+---
+
+## Q7.2 — Capture d'écran finale
+
+**Application complète et fonctionnelle**
+
+![Application finale](screen-short/step7/final-application.png)
+
+---
+
+# Référence rapide des hooks utilisés
+
+| Hook | Fichier(s) | Rôle |
+|------|------------|-------|
+| useState | App.jsx, useProducts.js, useCart.js, useDebounce.js | Gérer les états locaux |
+| useEffect | useProducts.js, useCart.js, useDebounce.js | Effets de bord (fetch, localStorage, timer) |
+| useContext | NavBar.jsx, ProductList.jsx, CartModal.jsx | Consommer le contexte panier |
+| useCallback | useCart.js | Mémoriser les fonctions du panier |
+| useMemo | useCart.js | Calculer cartCount et cartTotal |
+
+---
+
+# Ressources
+
+- Documentation React — Hooks
+- API dummyjson.com/products
+- Bootstrap 5
+- Bootstrap Icons
